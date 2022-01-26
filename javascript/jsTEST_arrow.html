@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JS Arrow Functions</title>
+<script type="text/javascript">
+	function main() {
+		console.log("Main func");
+
+		console.log(`Logging other: ${other}`);
+		//console.log(other);
+
+		const an_arr = [6, 15, 1, 20, 2, 10];
+		an_arr.sort((a, b) => a - b);
+		console.log(an_arr);
+	}
+
+	const other = () => {
+		console.log("Other func");
+	};
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		main();
+		other();
+	</script>
+	<h1>Check the JS console</h1>
+</body>
+</html>
