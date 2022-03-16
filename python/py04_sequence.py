@@ -62,4 +62,4 @@ print(list(d.values()))
 print("\ntuple test:")
 t = ("Farnan", "CS1520")
 # Will error, tuples are immutable
-t[0] = "Garrison"
+#t[0] = "Garrison"

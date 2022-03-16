@@ -49,21 +49,30 @@ def default():
 	return redirect(url_for("login_controller"))
 	
 @app.route("/login/")
-def login_controller():
+def login_controller(): 
+    #aha: this sets the action of the login page
+    # the action set is url for the profile fn :)
 	return loginPage.format(url_for("profile"))
 
+#overloaded w/ decorators to handle multiple logins
+#whatever is in url for <username> will get passed as an arg to this decorated fn
 @app.route("/profile/", methods=["GET", "POST"])
-@app.route("/profile/<username>", methods=["GET", "POST"])
+@app.route("/profile/<username>", methods=["GET", "POST"])	
 def profile(username=None):
 	rv = None
-
+ 
+	#bad bc not checking if POST (you hit submit button)
+	# or if GET (u added a username to url)
+	#Before chceking & setting things
+ 
 	if "user" in request.form and "pass" in request.form:
 		if request.form["user"] in users:
 			if users[request.form["user"]] == request.form["pass"]:
 				rv = True
 
+	#this username is set in the url (the og is set in the input)
 	if username and username in users:
-		rv = otherProfile.format(username)
+		rv = otherProfile.format(username) #add the other users name to page
 	
 	if request.method == "POST":
 		if rv:

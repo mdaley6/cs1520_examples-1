@@ -3,10 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 ### init
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app = Flask(__name__) #app is the flask app config
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' #we usin a lite version
+
 # feature we don't need that is being deprecated upstream by sqlaclchemy
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #suprresses warning msg
 db = SQLAlchemy(app)
 
 ### models
@@ -64,8 +65,8 @@ class Tag(db.Model):
 def displayResult(num, res):
 	print("\nQ{}:\n".format(num), res, "\n\n")
 		
-@app.cli.command('initdb')
-def initdb_command():
+@app.cli.command('initdb') #adds another command line option to flask
+def initdb_command():	   #type "initdb" in command line to call this fn
 	"""Reinitializes the database"""
 	db.drop_all()
 	db.create_all()
@@ -75,14 +76,14 @@ def initdb_command():
 	db.session.add(User("peter", "peter@example.org"))
 	db.session.add(User("guest", "guest@example.com"))
 
-	# populate 1-N example
+	#OPTION 1 populate 1-N example
 	nick = Person("Nick")
 	db.session.add(nick)
-	nick.addresses.append(Address("nlf4@pitt.edu"))
-
+	nick.addresses.append(Address("nlf4@pitt.edu")) #nick is foreign key
+	#OPTION 2
 	cs_addr = Address("nlf4@cs.pitt.edu")
 	db.session.add(cs_addr)
-	cs_addr.person = nick
+	cs_addr.person = nick #person we wanna tie this to (from backref)
 
 	# populate M-N example
 	p1 = Page("p1")
@@ -101,7 +102,7 @@ def initdb_command():
 	t2.pages.append(Page("p3"))
 	
 	# commit
-	db.session.commit()
+	db.session.commit()	#actually store it in DB
 	print('Initialized the database.')
 
 		
@@ -146,3 +147,5 @@ def default():
 		print("\tname:", t.name)
 		for p in t.pages:
 			print("\t\tpage:  ", p.name)
+   
+#Note we are using a python library (SQLAlcehmy) to access the DB as python objects (intead of SQL itself)

@@ -55,6 +55,7 @@ def login_controller():
 @app.route("/profile/", methods=["GET", "POST"])
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username=None):
+    #better bc checking request type off the cuff (b4 processing & setting things)
 	if request.method == "POST":
 		if "user" in request.form and "pass" in request.form:
 			if request.form["user"] in users:
@@ -63,7 +64,7 @@ def profile(username=None):
 		
 		abort(401)
 
-	else:
+	else: #get
 		if username and username in users:
 			return otherProfile.format(username)
 		else:

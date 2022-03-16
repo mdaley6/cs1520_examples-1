@@ -1,62 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>JS Storage</title>
-<script type="text/javascript">
-	// helper function
-	function addListItem(newText) {
-		const theList = document.getElementById("theList");
-		const listItem = document.createElement("li");
-		listItem.appendChild(document.createTextNode(newText));
-		theList.appendChild(listItem);
-	}
+    <title>JS Storage</title>
+    <script type="text/javascript">
+        // helper function
+        function addListItem(newText) {
+            const theList = document.getElementById("theList");
+            const listItem = document.createElement("li");
+            listItem.appendChild(document.createTextNode(newText));
+            theList.appendChild(listItem);
+        }
 
-	// read data from the localStorage to populate the empty list in the HTML body
-	function readLocalData() {
-		// check that storage is supported
-		if (typeof(Storage) !== "undefined") {
-			theList = document.getElementById("theList");
-			for (let i = 0; i < localStorage.length; i++) {
-			
-				// log some wackiness
-				console.log(localStorage.key(i));
-				console.log(typeof(localStorage.key(i)));
+        // read data from the localStorage to populate the empty list in the HTML body
+        function readLocalData() {
+            // check that storage is supported
+            if (typeof(Storage) !== "undefined") {
+                theList = document.getElementById("theList");
+                for (let i = 0; i <= localStorage.length; i++) {
 
-				// do the actual work
-				addListItem(localStorage.getItem(i));
-			}
-		}
-	}
+                    // log some wackiness
+                    console.log(localStorage.key(i));
+                    console.log(typeof(localStorage.key(i)));
 
-	// prompt the user for a new value, add it to the localStorage and add it to the list
-	function add() {
-		const response = prompt("What is something fun to do?");
+                    // do the actual work
+                    //avoids the null error:
+                    //var k = localStorage.key(i);
+                    //addListItem(localStorage.getItem(i));
+                    addListItem(localStorage.getItem(i));
+                }
+            }
+        }
 
-		if (typeof(Storage) !== "undefined") {
-			// figure out a new key for response based on number of items in storage
-			const i = localStorage.length;
-			localStorage.setItem(i, response);
-		}
+        // prompt the user for a new value, add it to the localStorage and add it to the list
+        function add() {
+            const response = prompt("What is something fun to do?");
 
-		// add the response to the ordered list
-		addListItem(response);
-	}
+            if (typeof(Storage) !== "undefined") {
+                // figure out a new key for response based on number of items in storage
+                const i = localStorage.length;
+                localStorage.setItem(i, response); //"i" is coerced to string 1 -> "1"
+            }
 
-	function setup() {
-		// make use of theButton
-		document.getElementById("theButton").addEventListener("click", add);
+            // add the response to the ordered list
+            addListItem(response);
+        }
 
-		// setup theList to be populated
-		readLocalData();
-	}
+        function setup() {
+            // make use of theButton
+            document.getElementById("theButton").addEventListener("click", add);
 
-	window.addEventListener("load", setup);
-</script>
+            // setup theList to be populated
+            readLocalData();
+        }
+
+        window.addEventListener("load", setup);
+    </script>
 </head>
+
 <body>
-	<h1>Your list of fun things to do:</h1>
-	<ol id="theList">
-	</ol>
-	<input id="theButton" type="button" value="Add to the list" />
+    <h1>Your list of fun things to do:</h1>
+    <ol id="theList">
+    </ol>
+    <input id="theButton" type="button" value="Add to the list" />
 </body>
+
 </html>

@@ -1,85 +1,88 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>JS Variables and Types</title>
-<script type = "text/javascript">
-	const x = 12;
+    <title>JS Variables and Types</title>
+    <script type="text/javascript">
+        const x = 12;
 
-	const y1 = "5";
-	const y2 = "bogus";
+        const y1 = "5";
+        const y2 = "bogus";
 
-	const z1 = x + y1;
-	const z2 = x + parseInt(y1);
-	const z3 = x * y1;
-	const z4 = x * y2;
+        const z1 = x + y1;
+        const z2 = x + parseInt(y1);
+        const z3 = x * y1;
+        const z4 = x * y2;
 
-	// Expected result:  
-	console.log(`1: ${x} + ${y1} = ${z1}`);
+        // Expected result:  "125"
+        console.log(`1: ${x} + ${y1} = ${z1}`);
 
-	// Expected result:  
-	console.log(`2: ${x} + ${y1} = ${z2}`);
+        // Expected result:  17
+        console.log(`2: ${x} + ${y1} = ${z2}`);
 
-	// Expected result:  
-	console.log(`3: ${x} * ${y1} = ${z3}`);
+        // Expected result:  60
+        console.log(`3: ${x} * ${y1} = ${z3}`);
 
 
-	// Expected result:  
-	console.log(`4: ${typeof(z4)}`);
+        // Expected result:  number
+        console.log(`4: ${typeof(z4)}`);
 
-	// Expected result:  
-	console.log(`5: ${x} * ${y2} = ${z4}`);
+        // Expected result:  Nan
+        console.log(`5: ${x} * ${y2} = ${z4}`);
 
-	
-	const wacky = z4 + " ha hah";
-	// Expected result:  
-	console.log(`6: wacky is ${wacky} and its type is ${typeof(wacky)}`);
 
-	let s;
-	// Expected result:  
-	console.log(`7: s is ${s} and its type is ${typeof(s)}`);
+        const wacky = z4 + " ha hah";
+        // Expected result:   Nan " ha hah" .. String
+        console.log(`6: wacky is ${wacky} and its type is ${typeof(wacky)}`);
 
-	s = prompt("Enter a string","");
-	// Expected result:  
-	console.log(`8: s is ${s} and its type is ${typeof(s)}`);
+        let s;
+        // Expected result:  undefined ... undefined
+        console.log(`7: s is ${s} and its type is ${typeof(s)}`);
 
-	const t = s.toUpperCase();
-	// Expected result:  
-	console.log(`9: ${t}`);
+        s = prompt("Enter a string", "");
+        // Expected result:  "longer string" .. String
+        console.log(`8: s is ${s} and its type is ${typeof(s)}`);
 
-	const u = s.length;
-	// Expected result:  
-	console.log(`10: ${u}`);
+        const t = s.toUpperCase();
+        // Expected result:  "LONGER STRING"
+        console.log(`9: ${t}`);
 
-	const v = s.substring(6,11);
-	// Expected result:  
-	console.log(`11: ${v}`);
+        const u = s.length;
+        // Expected result:  13
+        console.log(`10: ${u}`);
 
-	// Expected result:  
-	console.log(`12: ${typeof(s)}`);
-	s = 345;
-	// Expected result:  
-	console.log(`13: ${typeof(s)}`);
+        const v = s.substring(6, 11);
+        // Expected result:  " stri"
+        console.log(`11: ${v}`);
 
-	const test = 19;
-	const xx = 7;
-	const ans = test / xx;
-	// Expected result:  
-	console.log(`14: ans is ${ans} and its type is ${typeof(ans)}`);
+        // Expected result:  string
+        console.log(`12: ${typeof(s)}`);
+        s = 345;
+        // Expected result:  number
+        console.log(`13: ${typeof(s)}`);
 
-	// Expected result:  
-	console.log(`15: q is ${q} and its type is ${typeof(q)}`);
-	q = 7;
-	// Expected result:  
-	console.log(`16: q is ${q} and its type is ${typeof(q)}`);
-	var q = 8;
+        const test = 19;
+        const xx = 7;
+        const ans = test / xx;
+        // Expected result:  2.7142857142857144 ... number
+        console.log(`14: ans is ${ans} and its type is ${typeof(ans)}`);
 
-	p = 5;
-	// Expected result:  
-	console.log(`17: p is ${p} and its type is ${typeof(p)}`);
-	let p;
-</script>
+        // Expected result:  undefined ... undefined
+        console.log(`15: q is ${q} and its type is ${typeof(q)}`);
+        q = 7;
+        // Expected result:  7 ... number
+        console.log(`16: q is ${q} and its type is ${typeof(q)}`);
+        var q = 8;
+
+        p = 5;
+        // Expected result:  ReferenceError (at least on chrome)
+        console.log(`17: p is ${p} and its type is ${typeof(p)}`);
+        let p;
+    </script>
 </head>
+
 <body>
-	<h1>Check the JS console</h1>
+    <h1>Check the JS console</h1>
 </body>
+
 </html>
